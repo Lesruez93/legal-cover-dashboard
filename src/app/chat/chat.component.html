@@ -1,69 +1,44 @@
 <div class="main-content">
-
-    <div class="content container">
-
-
-        <div class="messaging row push">
-                <div class="col-md-12 push">
-                    <div class="content container">
-                        <div class="row row-broken">
-                            <div class="col-sm-12 col-xs-12 chat shaddowAdd" >
-                                <div class="decor-default">
-                                    <div class="chat-body" *ngFor="let data of inbox">
-
-
-                                        <!-- class are anwer left or right, u can change them dynamic baba-->
-                                        <div *ngIf="uid != data.uid" class="answer left" style="margin-top: 10px">
-                                            <div class="avatar">
-                                                <img src="{{data.dp}}" alt="User name">
-                                                <div class="status offline"></div>
-                                            </div>
-                                            <div class="name">{{data.first_name}}</div>
-                                            <div  class="text">
-                                                {{data.msg}}
-                                            </div>
-                                            <div class="time">{{data.id | amTimeAgo}}</div>
-                                        </div>
-
-                                        <div *ngIf="uid === data.uid" class="answer right" style="margin-top: 10px">
-                                            <div class="avatar">
-                                                <img src="{{data.dp}}" alt="User name">
-                                                <div class="status offline"></div>
-                                            </div>
-                                            <div class="name">{{data.first_name}}</div>
-                                            <div class="text">
-                                               {{data.msg}}
-                                            </div>
-                                            <div class="time">{{data.id | amTimeAgo}}</div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="answer-add2" style="width: 100%">
-                                <mat-form-field>
-                                        <textarea (keyup.enter)="send()" [(ngModel)]="msg" matInput >
-
-                                        </textarea>
-                                <mat-icon (click)="send()" matSuffix  style="margin-left: -40px" size="large">near_me</mat-icon>
-                                </mat-form-field>
-
-
-                            </div>
+    <div class="container-fluid">
+        <br/><br/><br/>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">chrome_reader_mode</i>
+                        </div>
+                        <p class="card-category">Users</p>
+                        <h3 class="card-title">{{users}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">chrome_reader_mode</i>
+                            <a >Send notification to all users...</a>
                         </div>
                     </div>
-
                 </div>
-
-
-
-
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">people</i>
+                        </div>
+                        <p class="card-category">Subscribers</p>
+                        <h3 class="card-title">{{users}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">notifications</i>
+                            <a >Send a message to a subscriber</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
+
     </div>
 </div>
-
-

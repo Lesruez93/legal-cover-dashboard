@@ -6,7 +6,7 @@
         <div class="sidebar-wrapper">
 
 
-                <div style="margin-top: 10px">
+                <div style="margin-top: 10px; margin-left: 20px">
                     <img style="height: 55px" src="/assets/img/logo2.png"/>
                 </div>
 
@@ -14,70 +14,15 @@
 
             <div class="user">
                 <div class="photo">
-                    <img (error)="data.photo = './assets/img/avatar.png'" src="{{data?.photo}}" />
+                    <img  src=" ./assets/img/avatar.png" />
                 </div>
                 <div class="user-info">
-                    <a *ngIf="type === 'Plumber'" routerLink="/profile/{{uid}}"   class="collapsed">
+                    <a    class="collapsed">
                         <span>
-                            {{usr}}
+                           Admin
 
                         </span>
                     </a>
-
-
-
-                    <a *ngIf="type === 'manufacture'"   class="collapsed">
-                        <span>
-                            {{comp}}
-
-                        </span>
-                    </a>
-
-
-                    <a *ngIf="type === 'insurance'"   class="collapsed">
-                        <span>
-                            {{comp}}
-
-                        </span>
-                    </a>
-
-
-
-                    <a *ngIf="type === 'admin' "   class="collapsed">
-                        <span>
-                          Admin
-
-                        </span>
-                    </a>
-
-                    <a routerLink="/profile/{{uid}}"  *ngIf="type === 'Company'"   class="collapsed">
-                        <span>
-                            {{usr}}
-
-                        </span>
-                    </a>
-<!--                    <div class="collapse" id="collapseExample">-->
-<!--                        <ul class="nav">-->
-<!--                            <li class="nav-item">-->
-<!--                                <a  class="nav-link" routerLink="/userprofile">-->
-<!--                                    <i class="material-icons">person</i>-->
-<!--                                    <span class="sidebar-normal">My Profile</span>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="nav-item">-->
-<!--                                <a  class="nav-link" routerLink="/userprofile">-->
-<!--                                    <span class="sidebar-mini">EP</span>-->
-<!--                                    <span class="sidebar-normal">Edit Profile</span>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="nav-item">-->
-<!--                                <a href="javascript:void(0)" class="nav-link">-->
-<!--                                    <span class="sidebar-mini">S</span>-->
-<!--                                    <span class="sidebar-normal">Settings</span>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
                 </div>
             </div>
 
@@ -85,125 +30,23 @@
             <ul class="nav" >
 
 
-<!--                <li routerLinkActive="active"  class="nav-item">-->
-<!--                    &lt;!&ndash;If is a single link&ndash;&gt;-->
-<!--                    <a [routerLink]="'/add-geyser'" *ngIf="comp === 'admin'" class="nav-link">-->
-<!--                        <i class="material-icons">add</i>-->
-<!--                        <p>Add geyser</p>-->
-<!--                    </a>-->
-<!--                </li>-->
-
-
-<!--                <li routerLinkActive="active"  class="nav-item">-->
-<!--                &lt;!&ndash;If is a single link&ndash;&gt;-->
-<!--                <a [routerLink]="'/geysers'" *ngIf="comp === 'admin'"  class="nav-link">-->
-<!--                    <i class="material-icons">assignment</i>-->
-<!--                    <p>Geysers</p>-->
-<!--                </a>-->
-<!--            </li>-->
-
 
                 <li routerLinkActive="active"  class="nav-item">
                     <!--If is a single link-->
-                    <a [routerLink]="'/submit'"  *ngIf="type === 'Plumber'|| type === 'Company' &&  !data.parent"  class="nav-link">
-                        <i class="material-icons">add_task</i>
-                        <p>Installation Forms</p>
-                    </a>
-                </li>
-
-                <li routerLinkActive="active"  class="nav-item">
-                    <!--If is a single link-->
-                    <a [routerLink]="'/submissions'"  *ngIf="type === 'Plumber'   &&  !data.parent "  class="nav-link">
-                        <i class="material-icons">history</i>
-                        <p>Installation History</p>
+                    <a [routerLink]="'/dashboard'" class="nav-link">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
                     </a>
                 </li>
 
 
                 <li routerLinkActive="active"  class="nav-item">
                     <!--If is a single link-->
-                    <a [routerLink]="'/submissions'"  *ngIf="type === 'Company'"  class="nav-link">
-                        <i class="material-icons">check_circle_outline</i>
-                        <p>Approved Submissions </p>
+                    <a [routerLink]="'/users'"   class="nav-link">
+                        <i class="material-icons">people</i>
+                        <p>Users </p>
                     </a>
                 </li>
-
-
-                <li routerLinkActive="active"  class="nav-item">
-                    <!--If is a single link-->
-                    <a [routerLink]="'/approve-submissions'"  *ngIf="type === 'Company'"  class="nav-link">
-                        <i class="material-icons">hourglass_empty</i>
-                        <p>Pending Submissions</p>
-                    </a>
-                </li>
-
-
-
-                <li routerLinkActive="active"  class="nav-item">
-                    <!--If is a single link-->
-                    <a [routerLink]="'/submissions'"  *ngIf="data?.type != 'Company' && data?.type != 'Plumber'"  class="nav-link">
-                        <i class="material-icons">check_circle_outline</i>
-                        <p>Submissions</p>
-                    </a>
-                </li>
-
-
-
-
-
-<!--                <li routerLinkActive="active"  class="nav-item">-->
-<!--                    &lt;!&ndash;If is a single link&ndash;&gt;-->
-<!--                    <a [routerLink]="'/request'"  *ngIf="type === 'insurance' " class="nav-link">-->
-<!--                        <i class="material-icons">contact_support</i>-->
-<!--                        <p>Request geyser info</p>-->
-<!--                    </a>-->
-<!--                </li>-->
-
-                <li routerLinkActive="active"  class="nav-item">
-                    <!--If is a single link-->
-                    <a [routerLink]="'/add-accounts'" *ngIf="comp === 'admin' || type === 'Company'" class="nav-link">
-                        <i class="material-icons">person_add</i>
-                        <p>Add accounts</p>
-                    </a>
-                </li>
-
-                <li routerLinkActive="active"  class="nav-item">
-                    <!--If is a single link-->
-                    <a [routerLink]="'/users'"  *ngIf="type === 'Company'"  class="nav-link">
-                        <i class="material-icons">group</i>
-                        <p>Staff Members </p>
-                    </a>
-                </li>
-
-
-
-
-                <li routerLinkActive="active" *ngIf="data?.parent"  class="nav-item">
-                    <!--If is a single link-->
-                    <a  class="nav-link" routerLink="/chat">
-                        <i class="material-icons">mail</i>
-                        <p>Inbox</p>
-                    </a>
-                </li>
-
-
-                <li routerLinkActive="active"  *ngIf="type == 'Plumber' || type === 'Company'" class="nav-item">
-                    <!--If is a single link-->
-                    <a routerLink="/resources" class="nav-link" >
-                        <i class="material-icons">book</i>
-                        <p>Resources</p>
-                    </a>
-                </li>
-
-                <li routerLinkActive="active"  class="nav-item">
-                    <!--If is a single link-->
-                    <a  class="nav-link" href="https://www.waccsa.co.za/support/" target="_blank">
-                        <i class="material-icons">contact_support</i>
-                        <p>Support</p>
-                    </a>
-                </li>
-
-
 
                 <li routerLinkActive="active"  class="nav-item">
                     <!--If is a single link-->

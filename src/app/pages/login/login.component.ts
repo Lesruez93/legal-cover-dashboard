@@ -82,10 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.afAuth.signInWithEmailAndPassword(this.username,this.password).then(res=>{
             console.log(res.user.uid)
 
-            this.afs.collection('users').doc(res.user.uid).valueChanges().subscribe((user:any)=>{
-
-
-            });
+            this.router.navigateByUrl('/')//+'?redirectURL='+this.redirectURL2);
 
 
         }).catch(error=>{

@@ -45,14 +45,7 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
-    churchname;
-    username;
-    comp: any = '';
-    user: string;
-    type: any;
-     uid: string;
-    usr: any = '';
-    data: any= {};
+
     constructor(private auth:AuthService,private router: Router,
                 private afs:AngularFirestore,
                 private afAuth:AngularFireAuth,

@@ -17,7 +17,7 @@
             <div class="card-icon">
               <i class="material-icons">assignment</i>
             </div>
-            <h4 class="card-title">Plumbers</h4>
+            <h4 class="card-title">Users</h4>
           </div>
           <div class="card-body">
             <div class="toolbar">
@@ -27,23 +27,35 @@
               <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                 <thead>
                 <tr>
-                  <th>{{ dataTable.headerRow[0] }}</th>
+                  <th class="disabled-sorting text-center">{{ dataTable.headerRow[0] }}</th>
                   <th>{{ dataTable.headerRow[1] }}</th>
-                  <th class="disabled-sorting text-center">{{ dataTable.headerRow[2] }}</th>
+                  <th>{{ dataTable.headerRow[2] }}</th>
+                  <th class="disabled-sorting text-center">{{ dataTable.headerRow[3] }}</th>
+
                 </tr>
                 </thead>
                 <tbody style="width: 100%">
                 <tr *ngFor="let row  of dataTable?.dataRows">
+                  <td class="disabled-sorting">
+                    <div class="user">
+
+                    <div class="photo">
+                    <img style="height: 40px" [src]="row.user_image">
+                    </div>
+                    </div>
+                  </td>
+
+
                   <td>{{row?.first_name}} {{row?.last_name}}</td>
                   <td>{{row?.phone_number}}</td>
-                  <td class="text-center" >
-                   <mat-icon matTooltip="Message" color="primary" routerLink="/inbox/{{row.uid}}" [matTooltipPosition]="'below'" class="material-icons pointer">chat</mat-icon>
+                  <td class="text-center disabled-sorting" >
+                   <mat-icon matTooltip="Send notification" color="primary" (click)="notify(row)" [matTooltipPosition]="'below'" class="material-icons pointer">notifications</mat-icon>
 
                      <mat-icon class="material-icons" color="primary" (click)="view(row.uid)"  matTooltip="View" [matTooltipPosition]="'below'">visibility</mat-icon>
 <!--                    <a matTooltip="Delete" (click)="delete(row)" [matTooltipPosition]="'below'" class="btn btn-link btn-danger btn-just-icon "><i class="material-icons">delete</i></a>-->
 
-                    <mat-slide-toggle style="margin-top: 10px" (change)="changed($event,row)" [checked]="false" *ngIf="row.status == 'disabled'">Enable</mat-slide-toggle>
-                    <mat-slide-toggle style="margin-top: 10px" (change)="changed($event,row)" [checked]="true" *ngIf="row.status != 'disabled'">Disable</mat-slide-toggle>
+<!--                    <mat-slide-toggle style="margin-top: 10px" (change)="changed($event,row)" [checked]="false" *ngIf="row.status == 'disabled'">Enable</mat-slide-toggle>-->
+<!--                    <mat-slide-toggle style="margin-top: 10px" (change)="changed($event,row)" [checked]="true" *ngIf="row.status != 'disabled'">Disable</mat-slide-toggle>-->
 
 
                   </td>

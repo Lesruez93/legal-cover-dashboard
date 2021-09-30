@@ -14,54 +14,30 @@ import {AngularFireAuth} from '@angular/fire/auth';
 })
 
 export class ChatComponent implements OnInit {
-     geysers: any;
-    inbox: any;
-    uid: any;
-     user: any;
-     msg: any;
+    // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
 
 
-    constructor(private afs:AngularFirestore,
-    private auth:AngularFireAuth,
-    ){
+    devotions;
+    notices;
+    series;
+    org_id;
+    subscribers: any;
+    users: number;
 
-    }
+    constructor(private db: AngularFirestore, private authservice: AngularFireAuth) {
 
-    ngOnInit() {
-
-        this.auth.authState.subscribe((res:any)=>{
-            if (res.uid){
-                this.uid =res.uid
-
-                this.afs.collection('msgs').doc(res.uid).collection('chat',
-                        ref => ref.orderBy('id','asc')).
-                valueChanges({idField:'docid'}).subscribe((res:any)=>{
-                    this.inbox = res
-                })
-                this.afs.collection('users').doc(res.uid).valueChanges().subscribe((res:any)=>{
-                    this.user = res
-                })
-            }
-        })
 
 
 
     }
 
 
-    send(){
-        if (this.msg){
-        let data = {
-            uid:this.uid,
-            dp:this.user.photo || null,
-            name:this.user.first_name,
-            id:Date.now(),
-            parent:this.user.parent,
-            msg:this.msg
-        }
-            this.afs.collection('msgs').doc(this.uid).collection('chat') .add(data).then((res:any)=>{
-            this.msg = null
-        })
-    }}
+    public ngOnInit() {
+        this.db.collection("users").valueChanges().subscribe(values => {
 
+            this.users = values.length
+
+        })
+
+    }
 }

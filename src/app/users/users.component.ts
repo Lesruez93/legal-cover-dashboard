@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import swal from 'sweetalert2';
 import {Subscription} from 'rxjs';
 import algoliasearch from 'algoliasearch/lite';
+import Swal from 'sweetalert2';
 declare const $: any;
 declare interface DataTable {
     headerRow: string[];
@@ -58,8 +59,8 @@ export class UsersComponent implements OnInit,AfterViewInit,OnDestroy {
                           .valueChanges({idField: 'docid'}).subscribe((resp: any) => {
                               this.users =  resp
                               this.dataTable = {
-                                  headerRow: ['Full name', 'ID Number', 'Actions'],
-                                  footerRow: [ 'Full name', 'Submission date', 'Actions'],
+                                  headerRow: ['Picture','Full name', 'ID Number', 'Actions'],
+                                  footerRow: [ "Picture", 'Full name', 'Submission date', 'Actions'],
 
                                   dataRows: this.users
                               };
@@ -171,4 +172,47 @@ export class UsersComponent implements OnInit,AfterViewInit,OnDestroy {
     msg(uid: any) {
         this.router.navigate(['/inbox/'+uid])
     }
+
+
+    async notify(row: any) {
+        // @ts-ignore
+        const { value: text } = await Swal.fire({
+            input: 'textarea',
+            title: 'Send notification',
+            inputPlaceholder: 'Type your message here...',
+
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Please enter a message!'
+                }
+            },
+            showCancelButton: true
+        })
+
+        if (text) {
+            this.afs.collection('notifications').add({
+                uid:row.uid,
+                msg:text,
+                date:Date.now(),
+                name:"Legal cover",
+
+            }).then(r=>{
+                // @ts-ignore
+                //Swal.fire(")
+                Swal.fire({
+                    position: 'top',
+                    icon: 'success',
+                    title: "notification sent to the user "+row.first_name,
+                    showConfirmButton: false,
+                    confirmButtonClass: "btn btn-info",
+
+                    timer: 1500
+                })
+            }).catch(e=>{
+
+            })
+
+        }
+    }
+
 }

@@ -6,7 +6,7 @@ export const GeysersRoutes: Routes = [
 
       path: '',
       children: [ {
-        path: 'chat',
+        path: 'dashboard',
         component: ChatComponent
     }]
 }
