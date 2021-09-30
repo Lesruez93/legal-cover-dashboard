@@ -1,0 +1,42 @@
+<nav #navbar class="navbar navbar-expand-lg navbar-transparent  navbar-absolute">
+  <div class="container-fluid">
+    <div    class="navbar-wrapper">
+      <div hidden class="navbar-minimize">
+        <button mat-raised-button (click)="minimizeSidebar()" class="btn btn-just-icon btn-white btn-fab btn-round">
+          <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+          <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+        </button>
+      </div>
+<!--      <a class="navbar-brand" href="{{getPath()}}"> {{getTitle()}}</a>-->
+    </div>
+    <button    mat-button class="navbar-toggler btn-no-ripple " style="margin-top: 30px;font-size: 40px" type="button" (click)="sidebarToggle()">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="navbar-toggler-icon icon-bar lg" style="font-size: 40px"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+     
+      <ul class="navbar-nav">
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" routerLink="/dashboard">-->
+<!--            <i class="material-icons">dashboard</i>-->
+<!--            <p>-->
+<!--              <span class="d-lg-none d-md-block">Stats</span>-->
+<!--            </p>-->
+<!--          </a>-->
+<!--        </li>-->
+     
+<!--        <li   class="nav-item" >-->
+
+
+<!--          <div class="example-button-container">-->
+<!--            <button (click)="logOut()" mat-fab color="primary" aria-label="Example icon button with a delete icon">-->
+<!--              <mat-icon >power_settings_new</mat-icon>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </li>-->
+      </ul>
+    </div>
+  </div>
+</nav>

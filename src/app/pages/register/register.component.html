@@ -1,0 +1,513 @@
+
+<style type="text/css">
+  .padding-topp {
+    padding-top: 1px;
+  }
+
+  .hide-icon {
+    position: absolute;
+    right: 6px;
+    top: 20px;
+  }
+</style>
+<div class="wrapper wrapper-full-page">
+
+
+  <div class="page-header register-page header-filter" filter-color="black" style="background-image: url('./assets/img/login.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+
+
+          <div class="card card-signup">
+            <h2 class="card-title text-center">Register as </h2>
+            <div class="card-body">
+
+                <mat-tab-group (selectedTabChange)="changed($event)" dynamicHeight mat-align-tabs="center">
+                  <mat-tab  label="An Individual">
+                    <div class="mr-auto">
+                      <!--                  <div class="social text-center">-->
+                      <!--                    <button mat-raised-button class="btn btn-just-icon btn-round btn-twitter">-->
+                      <!--                      <i class="fa fa-twitter"></i>-->
+                      <!--                    </button>-->
+                      <!--                    <button mat-raised-button class="btn btn-just-icon btn-round btn-dribbble">-->
+                      <!--                      <i class="fa fa-dribbble"></i>-->
+                      <!--                    </button>-->
+                      <!--                    <button mat-raised-button class="btn btn-just-icon btn-round btn-facebook">-->
+                      <!--                      <i class="fa fa-facebook"> </i>-->
+                      <!--                    </button>-->
+                      <!--                    <h4 class="mt-3"> or be classical </h4>-->
+                      <!--                  </div>-->
+                      <form  class="form" (ngSubmit)="c()" [formGroup]="register">
+                        <div class="form-group has-default padding-topp" >
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+
+                              <input type="text" class="form-control" formControlName="first_name"
+                                     (ngModelChange)="textValidationType($event)"
+                                     matInput
+                                     placeholder="First Name...">
+                              <app-field-error-display [displayError]="isFieldValid(register, 'first_name')" errorMsg="First name is required">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="form-group has-default padding-topp" >
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+
+                              <input type="text"
+                                     formControlName="last_name"
+                                     (ngModelChange)="textValidationType($event)"
+
+                                     matInput class="form-control" placeholder="Last Name">
+
+                              <app-field-error-display [displayError]="isFieldValid(register, 'last_name')" errorMsg="Last name is required">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default padding-topp">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+                              <input
+                                      type="email"
+                                      matInput
+                                      placeholder="Email Address *"
+                                      class="form-control"
+                                      [errorStateMatcher]="matcher"
+                                      formControlName="email"
+                                      (ngModelChange)="emailValidationRegister($event)">
+
+                              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Please enter a valid email address
+                              </mat-error>
+                              <mat-error *ngIf="emailFormControl.hasError('required')">
+                                Email is <strong>required</strong>
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default padding-topp" >
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+
+                              <input type="phone" class="form-control" formControlName="phone_number"
+                                     (ngModelChange)="textValidationType($event)"
+                                     matInput
+                                     placeholder="Phone Number.">
+                              <app-field-error-display [displayError]="isFieldValid(register, 'phone_number')" errorMsg="Phone number is required">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+
+                        <div class="form-group has-default padding-topp" >
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+
+                              <input  class="form-control" formControlName="id_number"
+                                      (ngModelChange)="textValidationType($event)"
+                                      matInput
+                                      placeholder="ID Number.">
+                              <app-field-error-display [displayError]="isFieldValid(register, 'id_number')" errorMsg="ID number is required">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+
+
+
+                        <div class="has-default" style="margin-top: 20px;" >
+
+                          <mat-form-field>
+                            <ngx-mat-file-input  formControlName="t_c" placeholder="Trade certificate or Proof of qualification of Affidavit." [accept]="'.pdf, .png, .jpg , .jpeg, .doc, .docx'" required></ngx-mat-file-input>
+                            <mat-icon matSuffix>attach_file </mat-icon>
+                            <mat-error  style="color: darkgreen" >
+                              In case you lost your certificate you may upload an affidavit
+                            </mat-error>
+                            <mat-error  *ngIf="register.get('t_c').hasError('required')">
+                              Please select a file
+                            </mat-error>
+                            <mat-error *ngIf="register.get('t_c').hasError('maxContentSize')">
+                              The total size must not exceed {{register.get('t_c')?.getError('maxContentSize').maxSize | byteFormat}} ({{register.get('t_c')?.getError('maxContentSize').actualSize
+                                    | byteFormat}}).
+                            </mat-error>
+
+                          </mat-form-field>
+                        </div>
+
+
+
+
+
+                        <div class="form-group has-default padding-topp">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+
+                            </div>
+                            <mat-form-field    >
+                              <input showHideInput
+                                     matInput
+                                     id="password"
+                                     class="form-control"
+                                     placeholder="Password *"
+                                     (ngModelChange)="passwordValidationRegister($event)"
+                                     formControlName="password">
+                              <i matSuffix
+                                 class="material-icons"
+                                 showHideTrigger="password"
+                                 [showHideStatus]="{ materialIcon: true, id: 'password' }"
+                              ></i>
+
+
+                              <app-field-error-display [displayError]="isFieldValid(register, 'password')" errorMsg="Enter a valid password.">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default padding-topp">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+
+                            </div>
+                            <mat-form-field >
+                              <input showHideInput
+                                     matInput
+                                     id="confirmPassword"
+                                     placeholder="Confirm Password *"
+                                     class="form-control"
+
+                                     (ngModelChange)="confirmPasswordValidationRegister($event)"
+                                     formControlName="confirmPassword">
+                              <i matSuffix
+                                 class="material-icons"
+                                 showHideTrigger="confirmPassword"
+                                 [showHideStatus]="{ materialIcon: true, id: 'confirmPassword' }"
+                              ></i>
+                              <app-field-error-display
+                                      [displayError]="isFieldValid(register, 'confirmPassword')" errorMsg="These passwords don't match. Try again!">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div >
+
+
+
+
+
+                        <div  class="form-check">
+
+                          Already have an account
+                          <a (click)="lg()"  >Signin</a>.
+
+
+                        </div>
+                        <div class="text-center">
+                          <button type="submit" class="btn btn-outline-primary btn-round mt-4">Register</button>
+                        </div>
+
+
+                      </form>
+                    </div>
+                  </mat-tab>
+
+
+                  <mat-tab  label="Company">
+
+                    <div class="mr-auto">
+
+                      <form  class="form" (ngSubmit)="c()" [formGroup]="register">
+                        <div class="form-group has-default padding-topp" >
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+
+                              <input type="text" class="form-control" formControlName="first_name"
+                                     (ngModelChange)="textValidationType($event)"
+                                     matInput
+                                     placeholder="Company Name...">
+                              <app-field-error-display [displayError]="isFieldValid(register, 'first_name')" errorMsg="Company name is required">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="form-group has-default padding-topp" >
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+
+                              <input type="text"
+                                     formControlName="last_name"
+                                     (ngModelChange)="textValidationType($event)"
+
+                                     matInput class="form-control" placeholder="Company Representative Name">
+
+                              <app-field-error-display [displayError]="isFieldValid(register, 'last_name')" errorMsg="Name is required">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default padding-topp">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+                              <input
+                                      type="email"
+                                      matInput
+                                      placeholder="Company Email Address *"
+                                      class="form-control"
+                                      [errorStateMatcher]="matcher"
+                                      formControlName="email"
+                                      (ngModelChange)="emailValidationRegister($event)">
+                              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Please enter a valid email address
+                              </mat-error>
+                              <mat-error *ngIf="emailFormControl.hasError('required')">
+                                Email is <strong>required</strong>
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default padding-topp" >
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+
+                              <input type="phone" class="form-control" formControlName="phone_number"
+                                     (ngModelChange)="textValidationType($event)"
+                                     matInput
+                                     placeholder="Phone Number.">
+                              <app-field-error-display [displayError]="isFieldValid(register, 'phone_number')" errorMsg="Phone number is required">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+
+                        <div class="form-group has-default padding-topp" >
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+                            <mat-form-field >
+
+                              <input  class="form-control" formControlName="id_number"
+                                      (ngModelChange)="textValidationType($event)"
+                                      matInput
+                                      placeholder="ID Number.">
+                              <app-field-error-display [displayError]="isFieldValid(register, 'id_number')" errorMsg="ID number is required">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+
+
+                        <div class="has-default" style="margin-top: 20px;" >
+
+                          <mat-form-field>
+                            <ngx-mat-file-input  formControlName="t_c" placeholder="Trade certificate or Proof of qualification of Affidavit." [accept]="'.pdf, .png, .jpg , .jpeg, .doc, .docx'" required></ngx-mat-file-input>
+                            <mat-icon matSuffix>attach_file </mat-icon>
+                            <mat-error  style="color: darkgreen" >
+                              In case you lost your certificate you may upload an affidavit
+                            </mat-error>
+                            <mat-error  *ngIf="register.get('t_c').hasError('required')">
+                              Please select a file
+                            </mat-error>
+                            <mat-error *ngIf="register.get('t_c').hasError('maxContentSize')">
+                              The total size must not exceed {{register.get('t_c')?.getError('maxContentSize').maxSize | byteFormat}} ({{register.get('t_c')?.getError('maxContentSize').actualSize
+                                    | byteFormat}}).
+                            </mat-error>
+
+                          </mat-form-field>
+                        </div>
+
+
+
+
+
+                        <div class="form-group has-default padding-topp">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+
+                            </div>
+                            <mat-form-field    >
+                              <input type="password"
+                                     showHideInput
+                                     matInput
+                                     id="password"
+                                     placeholder="Password *"
+                                     class="form-control"
+                                     (ngModelChange)="confirmPasswordValidationRegister($event)"
+                                     formControlName="password">
+
+                              <i matSuffix
+                                 class="material-icons"
+                                 showHideTrigger="password"
+                                 [showHideStatus]="{ materialIcon: true, id: 'password' }"></i>
+
+                              <app-field-error-display [displayError]="isFieldValid(register, 'password')" errorMsg="Enter a valid password.">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default padding-topp">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+
+                            </div>
+                            <mat-form-field >
+                              <input type="password"
+                                     showHideInput
+                                     matInput
+                                     id="confirmPassword"
+                                     placeholder="Confirm Password *"
+                                     class="form-control"
+                                     (ngModelChange)="confirmPasswordValidationRegister($event)"
+                                     formControlName="confirmPassword">
+
+                              <i matSuffix
+                                 class="material-icons"
+                                 showHideTrigger="confirmPassword"
+                                 [showHideStatus]="{ materialIcon: true, id: 'confirmPassword' }"></i>
+
+                              <app-field-error-display
+                                      [displayError]="isFieldValid(register, 'confirmPassword')" errorMsg="These passwords don't match. Try again!">
+                              </app-field-error-display>
+                            </mat-form-field>
+                          </div>
+                        </div >
+
+
+
+
+
+                        <div  class="form-check">
+
+                          Already have an account
+                          <a (click)="lg()"  >Signin</a>.
+
+
+                        </div>
+                        <div class="text-center">
+                          <button type="submit" class="btn btn-outline-primary btn-round mt-4">Register</button>
+                        </div>
+
+
+                      </form>
+                    </div>
+                  </mat-tab>
+
+                </mat-tab-group>
+<!--                <div class="col-md-5 ml-auto">-->
+<!--                  <div class="info info-horizontal">-->
+<!--                    <div class="icon icon-rose">-->
+<!--                      <i class="material-icons">timeline</i>-->
+<!--                    </div>-->
+<!--                    <div class="description">-->
+<!--                      <h4 class="info-title">Marketing</h4>-->
+<!--                      <p class="description">-->
+<!--                        Etiam efficitur, metus in cursus imperdiet, neque nisl porta erat, nec-->
+<!--                      </p>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="info info-horizontal">-->
+<!--                    <div class="icon icon-primary">-->
+<!--                      <i class="material-icons">code</i>-->
+<!--                    </div>-->
+<!--                    <div class="description">-->
+<!--                      <h4 class="info-title">Fully Coded </h4>-->
+<!--                      <p class="description">-->
+<!--                        Etiam efficitur, metus in cursus imperdiet, neque nisl porta erat, nec-->
+<!--                      </p>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="info info-horizontal">-->
+<!--                    <div class="icon icon-info">-->
+<!--                      <i class="material-icons">group</i>-->
+<!--                    </div>-->
+<!--                    <div class="description">-->
+<!--                      <h4 class="info-title">Built Audience</h4>-->
+<!--                      <p class="description">-->
+<!--                        Etiam efficitur, metus in cursus imperdiet, neque nisl porta erat, nec-->
+<!--                      </p>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+
+
+            </div>
+          </div>
+
+
+
+    </div>
+<!--    <footer class="footer ">-->
+<!--      <div class="container">-->
+<!--        <nav class="pull-left">-->
+<!--          <ul>-->
+<!--            <li>-->
+<!--              <a href="https://www.creative-tim.com">-->
+<!--                Creative Tim-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="https://creative-tim.com/about-us">-->
+<!--                About Us-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="http://blog.creative-tim.com">-->
+<!--                Blog-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="https://www.creative-tim.com/license">-->
+<!--                Licenses-->
+<!--              </a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </nav>-->
+<!--        <div class="copyright pull-right">-->
+<!--          &copy;-->
+<!--        {{test | date: 'yyyy'}}, made with <i class="material-icons">favorite</i> by-->
+<!--          <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </footer>-->
+  </div>
+</div>

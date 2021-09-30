@@ -1,0 +1,69 @@
+<div class="main-content">
+
+    <div class="content container">
+
+
+        <div class="messaging row push">
+            <div class="col-md-12 push">
+                <div class="content container">
+                    <div class="row row-broken">
+                        <div class="col-sm-12 col-xs-12 chat shaddowAdd" >
+                            <div class="decor-default">
+                                <div class="chat-body" *ngFor="let data of inbox">
+
+
+                                    <!-- class are anwer left or right, u can change them dynamic baba-->
+                                    <div *ngIf="uid != data.uid" class="answer left" style="margin-top: 10px">
+                                        <div class="avatar">
+                                            <img src="{{data.dp}}" alt="User name">
+                                            <div class="status offline"></div>
+                                        </div>
+                                        <div class="name">{{data.first_name}}</div>
+                                        <div  class="text">
+                                            {{data.msg}}
+                                        </div>
+                                        <div class="time">{{data.id | amTimeAgo}}</div>
+                                    </div>
+
+                                    <div *ngIf="uid === data.uid" class="answer right" style="margin-top: 10px">
+                                        <div class="avatar">
+                                            <img src="{{data.dp}}" alt="User name">
+                                            <div class="status offline"></div>
+                                        </div>
+                                        <div class="name">{{data.first_name}}</div>
+                                        <div class="text">
+                                            {{data.msg}}
+                                        </div>
+                                        <div class="time">{{data.id | amTimeAgo}}</div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="answer-add2" style="width: 100%">
+                            <mat-form-field>
+                                        <textarea (keyup.enter)="send()" [(ngModel)]="msg" matInput >
+
+                                        </textarea>
+                                <mat-icon (click)="send()" matSuffix  style="margin-left: -40px" size="large">near_me</mat-icon>
+                            </mat-form-field>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+

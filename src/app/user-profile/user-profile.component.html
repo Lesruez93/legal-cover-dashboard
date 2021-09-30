@@ -1,0 +1,175 @@
+<div class="main-content">
+    <ngx-spinner
+            bdColor="rgba(51,51,51,0.8)"
+            size="medium"
+            color="#fff"
+            type="ball-fall">
+        <p style="font-size: 20px; color: white"></p>
+    </ngx-spinner>
+    <div class="container-fluid">
+<!--        <div id="recaptcha-container" ></div>-->
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header-rose">
+                        <div class="card-icon">
+                            <i class="material-icons">perm_identity</i>
+                        </div>
+                        <h4 class="card-title">Edit Profile -
+                            <small class="category">Complete your profile</small>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <!--            <form>-->
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Email address</label>
+                                    <input readonly [value]="user.email" type="email" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Fist Name</label>
+                                    <input [readOnly]="uid !== uid2" [(ngModel)]="user.first_name" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Last Name</label>
+                                    <input  [readOnly]="uid !== uid2" [(ngModel)]="user.last_name"type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Phone Number</label>
+                                    <input  [readOnly]="uid !== uid2" [(ngModel)]="user.phone_number" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">ID Number</label>
+                                    <input  [readOnly]="uid !== uid2" [(ngModel)]="user.id_number" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button *ngIf="uid2 === uid" [hidden]="user.parent" mat-raised-button type="submit"  (click)="update()" class="btn btn-rose pull-right">Update Profile</button>
+                        <div class="clearfix"></div>
+                        <!--            </form>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <label *ngIf="uid === uid2" for="imageInput">
+
+                            <img  class="img"  (error)="user.photo = './assets/img/avatar.png'" src="{{user?.photo}}" />
+
+
+                        </label>
+
+                        <label *ngIf="uid !== uid2" for="imageInput">
+
+                            <img  class="img"  (error)="user.photo = './assets/img/avatar.png'" src="{{user?.photo}}" />
+
+
+                        </label>
+
+                        <input style="display: none" type="file"  accept="image/*" id="imageInput" name="cameraInput" (change)="uploadI($event,'photo')">
+
+                    </div>
+                    <div class="card-body">
+                        <label *ngIf="uid === uid2"  for="imageInput">
+                        <div  class="btn btn-rose">Change Picture</div>
+                        </label>
+                        <h6 class="card-category text-gray">Plumber</h6>
+                        <h4 class="card-title">{{user?.first_name}}</h4>
+
+                        <!--            <a href="#pablo" class="btn btn-rose btn-round">Follow</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="!user.parent">
+            <div *ngIf="uid === uid2" class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header-rose">
+                        <div class="card-icon">
+                            <i class="material-icons">visibility</i>
+                        </div>
+                        <h4 class="card-title">Profile -
+                            <small class="category">Trading certificates</small>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <!--            <form>-->
+                        <div style="margin-top: 10px" *ngFor=" let c of certificates"  >
+                            <label class="bmd-label-floating">{{c}}</label>
+                            <input  (change)="uploadFile($event,c)"  accept="image/png, image/gif, image/jpeg"  type="file" class="form-control"/>
+                        </div>
+
+
+
+
+                        <div class="clearfix"></div>
+                        <!--            </form>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header-rose">
+                        <div class="card-icon">
+                            <i class="material-icons" >card_membership</i>
+                        </div>
+                        <h4 class="card-title">Profile -
+                            <small class="category">Trade certificates</small>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                            <ul>
+                        <li > <label class="bmd-label-floating">  General Certificate  &nbsp; &nbsp; </label>
+                            <a href="{{user.t_c}}" target="_blank" matTooltip="View" [matTooltipPosition]="'below'"  >
+                                <i class="material-icons">visibility </i></a>
+                        </li>
+                            </ul>
+                        <mat-divider></mat-divider>
+                        <!--            <form>-->
+                        <div *ngFor="let o of certificates">
+
+
+                        <ul style="margin-top: 10px" *ngFor=" let c of user[trm(o)]"  >
+                          <li > <label class="bmd-label-floating">  {{o}} &nbsp; &nbsp;</label>
+                              <a href="{{c}}" target="_blank" matTooltip="View" [matTooltipPosition]="'below'"  >
+                                  <i class="material-icons">visibility </i></a>
+                          </li>
+                        </ul>
+                            <mat-divider></mat-divider>
+                    </div>
+
+
+
+                        <div class="clearfix"></div>
+                        <!--            </form>-->
+                    </div>
+                </div>
+            </div>
+<!--            <button (click)="logi()">Login</button>-->
+
+        </div>
+
+
+    </div>
+</div>

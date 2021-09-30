@@ -1,0 +1,62 @@
+
+
+
+.swal2-popup #swal2-content {
+    text-align: center;
+    font-size: x-large;
+    color: red;
+    font-weight: 600;}
+/* You can add global styles to this file, and also import other style files */
+
+
+.red{
+    border: 5px solid red;
+    border-radius: 7px;
+}
+
+
+.blue{
+    border: 1px solid rgba(54, 55, 56, 0.65)
+
+}
+
+
+.red2{
+    color : red;
+    font-weight: bolder;
+    margin-left: 10px;
+}
+
+
+.blue2{
+
+}
+
+
+
+.dataTables_wrapper div.dataTables_filter input {
+    width: 300px !important;
+}
+
+
+mat-error{
+    font-weight: 900;
+    font-size: 15px;
+    color: red;
+
+}
+
+label{
+
+}
+
+
+.bmd-label-floating, .bmd-label-placeholder{
+
+}
+.pointer {cursor: pointer;
+}
+
+.mat-radio-label-content{
+    white-space: pre-wrap !important;
+}
