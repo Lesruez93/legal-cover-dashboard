@@ -4,39 +4,102 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="card card-stats">
-                    <div class="card-header card-header-primary card-header-icon">
+                    <div (click)="notify()"  class="card-header pointer card-header-primary card-header-icon">
                         <div class="card-icon">
-                            <i class="material-icons">chrome_reader_mode</i>
+                            <i class="material-icons">notifications</i>
                         </div>
-                        <p class="card-category">Users</p>
-                        <h3 class="card-title">{{users}}</h3>
+<!--                        <p class="card-category">Users</p>-->
+<!--                        <h3 class="card-title">{{users}}</h3>-->
                     </div>
-                    <div class="card-footer">
-                        <div class="stats">
+                    <div (click)="notify()" class="card-footer">
+                        <div  class="stats pointer">
                             <i class="material-icons">chrome_reader_mode</i>
                             <a >Send notification to all users...</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div  class="col-lg-6 col-md-6 col-sm-6">
                 <div class="card card-stats">
-                    <div class="card-header card-header-primary card-header-icon">
+                    <div routerLink="/users" class="card-header pointer card-header-primary card-header-icon">
                         <div class="card-icon">
                             <i class="material-icons">people</i>
                         </div>
-                        <p class="card-category">Subscribers</p>
+                        <p class="card-category">Users</p>
                         <h3 class="card-title">{{users}}</h3>
                     </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">notifications</i>
-                            <a >Send a message to a subscriber</a>
+                    <div (click)="notify()" class="card-footer">
+                        <div class="stats pointer">
+                            <i class="material-icons">people</i>
+                            <a >View users</a>
                         </div>
                     </div>
                 </div>
             </div>
 
+
+
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">phone</i>
+                        </div>
+                        <p class="card-category">Phone numbers</p>
+
+                    </div>
+                    <div  style="margin: 21px">
+                        <div >
+                            <label>Crime</label>
+
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="numbers.crime" matInput type="tel">
+                                </mat-form-field>
+
+                        </div>
+                        <div >
+                            <label>EMS</label>
+
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="numbers.ems" matInput type="tel">
+                                </mat-form-field>
+
+                        </div>
+
+                        <div >
+                            <label>Fire</label>
+
+                            <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="numbers.fire" matInput type="tel">
+                            </mat-form-field>
+
+                        </div>
+
+                        <div >
+                            <label>Legal</label>
+                            <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="numbers.legal" matInput type="tel">
+                            </mat-form-field>
+
+                        </div>
+
+
+                        <div >
+                            <label>Lawyer</label>
+                            <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="numbers.lawyer" matInput type="tel">
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="col-md-9">
+                            <button mat-raised-button type="submit" (click)="update()" class="btn btn-fill btn-block btn-success">Update</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
 
 

@@ -9,6 +9,8 @@ import {StoreRoutes} from './users.routing';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {UsersComponent} from './users.component';
 import {NgAisModule} from 'angular-instantsearch';
+import {DataTablesModule} from 'angular-datatables';
+import {AgmCoreModule} from '@agm/core';
 
 
 
@@ -18,10 +20,10 @@ import {NgAisModule} from 'angular-instantsearch';
         RouterModule.forChild(StoreRoutes),
         FormsModule,
         MaterialModule,
-
         NgxSummernoteModule,
         NgxSpinnerModule,
-        NgAisModule
+        NgAisModule,
+        DataTablesModule
     ],
   declarations: [UsersComponent]
 })

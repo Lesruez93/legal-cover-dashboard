@@ -44,11 +44,7 @@ export const AppRoutes: Routes = [
             },
 
 
-          {
-              path: '',
-              loadChildren: './approve-submissions/approve-submissions.module#ApproveSubmissionsModule',
 
-        },
 
 
           {

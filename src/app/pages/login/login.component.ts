@@ -75,15 +75,29 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     onlogin() {
 
-
+let params = this.route.snapshot.queryParams;
+        if (params['redirectURL']) {
+            this.redirectURL2 = params['redirectURL'];
+        }
         this.spinner.show();
 
 
         this.afAuth.signInWithEmailAndPassword(this.username,this.password).then(res=>{
             console.log(res.user.uid)
 
-            this.router.navigateByUrl('/')//+'?redirectURL='+this.redirectURL2);
+            let params = this.route.snapshot.queryParams;
+            if (params['redirectURL']) {
+                this.redirectURL = params['redirectURL'];
+            }
 
+
+            if (this.redirectURL) {
+                this.router.navigateByUrl(this.redirectURL,)
+                    .catch(() => this.router.navigate(['/']))
+            } else {
+
+                this.router.navigate(['/'])
+            }
 
         }).catch(error=>{
             console.log(error)

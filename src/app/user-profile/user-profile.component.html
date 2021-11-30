@@ -71,7 +71,7 @@
                 <div class="card card-profile">
                     <div class="card-avatar">
 
-                            <img  class="img"  (error)="user.photo = './assets/img/avatar.png'" src="{{user?.photo}}" />
+                            <img  class="img"  (error)="user.photo = '/assets/img/avatar.png'" src="{{user?.user_image}}" />
 
 
                                   </div>
@@ -82,9 +82,39 @@
                         <!--            <a href="#pablo" class="btn btn-rose btn-round">Follow</a>-->
                     </div>
                 </div>
-            </div>
-        </div>
 
+
+            </div>
+
+        </div>
+        <div *ngIf="lat" class="card">
+            <div class="text-center pull">
+
+
+            <button (click)="gotIt()" class="btn btn-primary  btn-sm ">Go it</button>
+            </div>
+
+            <agm-map style="width: 100%"
+                     [latitude]="lat"
+                     [longitude]="lng"
+                     [zoom]="17"
+                     [disableDefaultUI]="false"
+
+
+            >
+                <agm-marker
+                        [latitude]="lat"
+                        [longitude]="lng"
+                >
+                    <agm-info-window>
+                        <strong>{{user.first_name}}</strong>
+                    </agm-info-window>
+
+                </agm-marker>
+            </agm-map>
+
+
+        </div>
 
 
     </div>
