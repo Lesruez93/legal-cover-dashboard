@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 declare var $: any;
 
@@ -8,7 +9,7 @@ declare var $: any;
 
 export class NotificationService {
 
-  constructor() { }
+  constructor( private httpClient: HttpClient,) { }
 
   showNotification(message:string,from: any, align: any, type:any,title:any) {
     // const type = ['', 'info', 'success', 'warning', 'danger', 'rose', 'primary'];
@@ -44,6 +45,16 @@ export class NotificationService {
 
 
 
+  post(data) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic NzU2MzdmOWMtNDRlMi00OTJlLWE0YmQtY2RmNDhmY2EzZTM3'
+      })
+    };
+
+    return  this.httpClient.post('https://onesignal.com/api/v1/notifications', data, httpOptions)
+  }
 
 
 }

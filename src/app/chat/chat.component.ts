@@ -5,6 +5,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {SwalService} from '../swal.service';
 import Swal from 'sweetalert2';
+import {NotificationService} from '../notification.service';
 
 
 
@@ -28,9 +29,11 @@ export class ChatComponent implements OnInit {
     numbers: any = {
 
     };
+    news: any = 6;
 
     constructor(private db: AngularFirestore,
                 private swal:SwalService,
+                private not:NotificationService,
                 private afs: AngularFireAuth) {
 
 
@@ -79,6 +82,7 @@ export class ChatComponent implements OnInit {
                 name: 'Legal cover',
 
             }).then(r => {
+                this.postNot(text)
                 // @ts-ignore
                 //Swal.fire(")
                 Swal.fire({
@@ -97,11 +101,32 @@ export class ChatComponent implements OnInit {
         }
     }
 
+
+
     update() {
         this.db.collection("calls").doc('numbers').update(this.numbers).then(values => {
 
            this.swal.show('Updated','success')
 
+        })
+    }
+
+
+    postNot(msg){
+        let postData = {
+
+            "app_id": "1a3b10ba-afb8-46c4-9ee2-3dbe68fdf926",
+            "data": {msg: msg},
+            "contents": {"en": msg},
+            "heading":{"en": "New Notification"},
+            "included_segments": ["Subscribed Users"],
+
+
+        }
+
+        this.not.post(postData).subscribe(re => {
+
+        }, error1 => {
         })
     }
 }

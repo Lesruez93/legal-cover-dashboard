@@ -71,9 +71,12 @@ export class UserProfileComponent  implements OnInit {
         });
 
         this.afs.collection('location').doc(this.uid2).valueChanges().subscribe((res: any) => {
-            if (res.latitude) {
-                this.lat = res.latitude
-                this.lng = res.longitude
+            if (res?.latitude) {
+                this.lat = res?.latitude
+                this.lng = res?.longitude
+            }else {
+                this.lat = null
+                this.lng = null
             }
 
 

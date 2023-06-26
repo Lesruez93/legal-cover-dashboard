@@ -48,6 +48,24 @@
                     </a>
                 </li>
 
+
+                <li routerLinkActive="active"  class="nav-item">
+                    <!--If is a single link-->
+                    <a [routerLink]="'/articles'"   class="nav-link">
+                        <i class="material-icons">newspaper</i>
+                        <p>News </p>
+                    </a>
+                </li>
+
+
+                <li routerLinkActive="active"  class="nav-item">
+                    <!--If is a single link-->
+                    <a [routerLink]="'/resources'"   class="nav-link">
+                        <i class="material-icons">web</i>
+                        <p>Resources </p>
+                    </a>
+                </li>
+
                 <li routerLinkActive="active"  class="nav-item">
                     <!--If is a single link-->
                     <a class="nav-link" (click)="logOut()">

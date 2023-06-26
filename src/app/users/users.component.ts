@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import {Subject, Subscription} from 'rxjs';
 import {DataTableDirective} from 'angular-datatables/src/angular-datatables.directive';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 declare const $: any;
 
 
@@ -179,6 +180,8 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
                 name: 'Legal cover',
 
             }).then(r => {
+                this.postNot(row.sig_id,text)
+
                 // @ts-ignore
                 //Swal.fire(")
                 Swal.fire({
@@ -196,6 +199,8 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
 
         }
     }
+
+
     ngOnDestroy(): void {
         // Do not forget to unsubscribe the event
         this.sub.unsubscribe()
@@ -212,4 +217,24 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-}
+
+
+    postNot(uid,msg){
+        let postData = {
+
+            "app_id": "1a3b10ba-afb8-46c4-9ee2-3dbe68fdf926",
+            "data": {uid: msg},
+            "contents": {"en": msg},
+            "heading":{"en": "New Notification"},
+            "include_player_ids":[uid],
+        }
+
+
+
+            this.toast.post(postData).subscribe(re => {
+
+            }, error1 => {
+            })
+        }}
+
+

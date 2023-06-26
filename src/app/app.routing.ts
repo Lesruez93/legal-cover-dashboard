@@ -52,6 +52,17 @@ export const AppRoutes: Routes = [
               loadChildren: './users/users.module#UsersModule'
           },
 
+
+          {
+              path: '',
+              loadChildren: './articles/articles.module#ArticlesModule'
+          },
+
+          {
+              path: '',
+              loadChildren: './res/res.module#ResModule'
+          },
+
           {
               path: '',
               loadChildren: './chat/chat.module#ChatModule',
@@ -72,6 +83,11 @@ export const AppRoutes: Routes = [
 
 
 
+    },
+
+    {
+        path: '',
+        loadChildren: './popia/popia.module#PopiaModule'
     },
     {
       path: '',

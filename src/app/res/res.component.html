@@ -1,0 +1,91 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8"  >
+<!--           *ngIf="adding, else editing">-->
+        <div class="row">
+          <div class="card">
+            <div class="card-header card-header-icon card-header-primary">
+              <div class="card-icon">
+                <i class="material-icons">create</i>
+              </div>
+              <h4 class="card-title" [hidden]="editing">New Resource</h4>
+              <h4 class="card-title" [hidden]="!editing">Update Resource</h4>
+
+
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+
+                <div class="col-sm-12" >
+                  <mat-form-field class="example-full-width">
+                    <input  id="title" matInput type="text" [(ngModel)]="title" placeholder="Title">
+                  </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <input  id="link" matInput type="text" [(ngModel)]="link" placeholder="Link">
+                    </mat-form-field>
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="col-sm-12">
+                  <button (click)="save()" [hidden]="editing" [disabled]="save_disabled" mat-raised-button class="btn btn-primary pull-center">Save</button>
+                  <button (click)="update()" [hidden]="!editing" [disabled]="save_disabled" mat-raised-button class="btn btn-primary pull-center">Update</button>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </div>
+    <div style="margin-top: 4%"  class="row">
+      <div class="col-md-3" *ngFor="let article of links ">
+        <div class="card card-product">
+          <div class="card-header card-header-image" data-header-animation="true">
+
+          </div>
+          <div class="card-body">
+            <div class="card-actions text-center">
+
+
+              <button mat-raised-button type="button" (click)="showEdit(article)" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">
+                <i class="material-icons">edit</i>
+              </button>
+              <button mat-raised-button type="button"  (click)="onDelete(article.docid)"class="btn btn-danger btn-link" matTooltip="Delete" [matTooltipPosition]="'below'">
+                <i class="material-icons">close</i>
+              </button>
+            </div>
+            <h6 class="card-title">
+              <a >{{article?.title}}</a>
+            </h6>
+
+
+              <p class="card-description">
+                  <a  [href]="article.link" target="_blank">{{article.link}}</a>
+              </p>
+          </div>
+          <div class="card-footer">
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
